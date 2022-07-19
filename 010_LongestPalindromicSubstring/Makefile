@@ -1,4 +1,4 @@
-appname := exe
+appname := main.exe
 
 CXX := clang++
 CPPFLAGS := -g -fdiagnostics-color=always -std=c++17
