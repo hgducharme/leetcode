@@ -1,11 +1,12 @@
 #pragma once
 
-#include <string>
 #include <iostream>
-using namespace std;
+#include <vector>
 
 class Solution {
 public:
+    std::vector<int> cachedSteps;
 
     int climbStairs(int n);
+    int calculateUniqueStairClimbs(int n);
 };

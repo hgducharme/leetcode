@@ -1,14 +1,11 @@
-#include <string>
 #include <iostream>
 #include "Solution.hpp"
 
 int main() {
     Solution solution;
-    std::string testCase = "abba";
+    int testCase = 10;
 
-    solution.longestPalindrome(testCase);
-
-    std::cout << "Longest palindrome: " << solution.palindrome << std::endl;
+    solution.climbStairs(testCase);
 
     return 0;
 }
