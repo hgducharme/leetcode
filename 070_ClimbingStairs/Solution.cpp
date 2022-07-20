@@ -1,6 +1,9 @@
 #include "Solution.hpp"
 
 int Solution::climbStairs(int n) {
+    if (n < 1) return 0;
+    if (n == 1 || n == 2) return n;
+
     /* Make the cache one-based indexing so it's intuitive to work with */
     cachedSteps.resize(n + 1);
     cachedSteps[1] = 1;
