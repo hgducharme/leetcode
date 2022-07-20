@@ -1,4 +1,4 @@
-# Longest Palindromic Substring
+# Climbing Stairs
 
 ## Problem Type
 
@@ -6,20 +6,18 @@ Dynamic Programming
 
 ## Solution description
 
-1. Iterate through the string
+The trick to this problem is to realize the recursive relationship:
 
-2. Consider the character the center of either an odd- or even-lengthed palindrome
-    
-    a. For odd-lengthed palindromes, the center is a single character
-    
-    b. For even-lengthed palindromes, the center is defined by two characters
+```
+climbStairs(n) = climbStairs(n - 1) + climbStairs(n - 2)
+```
 
-3. Maintain an index for the center of the palindrome
+That is, the number of ways to reach the `nth` step is the sum of the number of ways to reach the `n-1` step and the number of ways to reach the `n-2` step. Put differently, how many ways can we reach the `nth` step if our first move is with one step? Now how many ways can we reach the `nth` step if our first move is by jumping two steps?
 
-    a. This will be one index for the center of odd-lengthed palindromes
+For example, consider `n = 4`:
 
-    b. This will be two indexes for the center of even-lengthed palindromes
+1. If our first move is to do one step, then we have three steps remaining. The number of ways to traverse the next three steps is three.
 
-4. While the indexes are within the bounds of the string, check if the left and right characters equal each other. If they do, continue moving the left and right index outwards until we find characters that don't match each other.
+2. If our first move is to jump two steps, then we have two steps remaining. The number of ways to traverse the next two steps is two. 
 
-5. From the resulting indexes, we know the starting point of the palindrome and the ending point of the palindrome
+3. Therefore, the number of ways to traverse four steps is `3 + 2 = 5`.

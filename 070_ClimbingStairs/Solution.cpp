@@ -2,7 +2,7 @@
 
 int Solution::climbStairs(int n) {
     if (n < 1) return 0;
-    if (n == 1 || n == 2) return n;
+    if (n == 1 || n == 2 || n == 3) return n;
 
     /* Make the cache one-based indexing so it's intuitive to work with */
     cachedSteps.resize(n + 1);
