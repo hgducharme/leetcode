@@ -7,6 +7,5 @@
 
 class Solution {
 public:
-
     int function(int n);
 };
