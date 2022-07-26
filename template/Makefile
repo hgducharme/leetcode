@@ -24,4 +24,6 @@ clean:
 distclean:
 	$(remove) *~ .depend
 
+napalm: clean distclean
+
 include .depend
