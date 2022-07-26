@@ -10,34 +10,48 @@ void Solution::merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, in
         return;
     }
 
-    int j, k = 0;
-    int placeFirst, placeLater;
-    int cachedNum = std::numeric_limits<int>::max();
+    int j = 0, k = 0;
     std::vector<int> cache;
 
     for (int i = 0; i < nums1.size(); i++) {
-        int num1 = nums1[i];
-        int num2 = nums2[j];
-        if (!cache.empty()) {
-            cachedNum = cache[k];
-        }
-        
-        int numToInsert = std::min(num2, cachedNum);
+        int numToInsert;
+        int num1 = nums1.at(i);
+        int num2 = std::numeric_limits<int>::max();
+        int cachedNum = std::numeric_limits<int>::max();
+        bool usingCachedNum;
 
-        if (i >= n) {
-            nums1[i] = numToInsert;
+        bool cacheContainsUnsortedNumbers = (!cache.empty() && k < cache.size());
+        if (cacheContainsUnsortedNumbers) {
+            cachedNum = cache.at(k);
         }
-        else if (num1 > numToInsert) {
-            placeLater = num1;
-            nums1[i] = numToInsert;
-            cache.push_back(placeLater);
+
+        bool nums2HasUnsortedNumbers = j < nums2.size();
+        if (nums2HasUnsortedNumbers) {
+            num2 = nums2.at(j);
+
+        // Determine which number we are inserting: is it from the nums2 array or is it from the cache?
+        // This is important for how we increment our indexes.
+        if (num2 > cachedNum) {
+            numToInsert = cachedNum;
+            usingCachedNum = true;
         }
         else {
-            // If num1 <= num2, just leave num1 alone and continue to the next element.
-            // We only insert num2 into nums1 array if num2 > num1.
+            numToInsert = num2;
+            usingCachedNum = false;
         }
 
-        if (numToInsert == num2) j++;
-        if (numToInsert == cachedNum) k++;
+        // If we've made it through all of the nums1 elements, just start inserting the items we have left over, in order
+        if (i >= m) {
+            nums1.at(i) = numToInsert;
+            usingCachedNum ? k++ : j++;
+        }
+        // If the element in nums1 array is bigger than the element we currently have, then insert the smaller one
+        else if (num1 > numToInsert) {
+            int placeLater = num1;
+            nums1.at(i) = numToInsert;
+            cache.push_back(placeLater);
+            usingCachedNum ? k++ : j++;
+        }
+        else {}
     }
 }
